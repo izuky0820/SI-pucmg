@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Detalhes do Álbum</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/detalhes.css">
+</head>
+
+<body>
+    <header class="topbar">
+        <button id="menuHamburger" class="hamburger-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="actions">
+            <button id="btnBusca"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="text" id="campoBusca" placeholder="Buscar" oninput="pesquisar()" style="display: none;">
+        </div>
+    </header>
+
+    <nav class="sidebar d-flex flex-column p-3" id="sidebarMenu">
+        <button id="closeMenu" class="close-menu-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo Billie Eilish">
+        </div>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link"><i class="fas fa-home me-2"></i> Home</a>
+            </li>
+            <li>
+                <a href="login.html" class="nav-link"><i class="fas fa-user me-2"></i> Login</a>
+            </li>
+            <li>
+                <a href="favoritos.html" class="nav-link"><i class="fas fa-heart me-2"></i> Favoritos</a>
+            </li>
+            <li>
+                <a href="discografia.html" class="nav-link"><i class="fa-solid fa-record-vinyl me-2"></i>
+                    Discografia</a>
+            </li>
+            <li>
+                <a href="conectar.html" class="nav-link"><i class="fas fa-users me-2"></i> Conectar</a>
+            </li>
+            <li class="bottom">
+                <a href="addAlbum.html"><i class="fa-solid fa-plus"></i>Adicionar álbum</a>
+            </li>
+            <li class="bottom">
+                <a href="sobre.html"><i class="fas fa-user-circle"></i>Biografia</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <div id="tela">Carregando...</div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/scripts/app.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const tela = document.getElementById('tela');
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            if (!id) {
+                tela.innerHTML = '<p>ID inválido. Verifique o link.</p>';
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`http://localhost:3000/destaque/${id}`);
+                if (!resposta.ok) throw new Error("Álbum não encontrado");
+
+                const album = await resposta.json();
+
+                                tela.innerHTML = `
+            <div class="album-layout">
+                <div class="left-side">
+                    ${album.imagem ? `<img src="${album.imagem}" alt="${album.album}" class="album-cover">` : ''}
+                    <div class="album-info">
+                        <h1>${album.album}</h1>
+                        <p><strong>Lançamento:</strong> ${album.lancamento}</p>
+                        <p>${album.informacoes}</p>
+                        <div class="links">
+                            <a href="${album.youtube}" target="_blank" class="yt">
+                                <i class="bi bi-youtube"></i> YouTube
+                            </a>
+                            <a href="${album.spotify}" target="_blank" class="sp">
+                                <i class="bi bi-spotify"></i> Spotify
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-side">
+                    <h2>Faixas</h2>
+                    <ul id="lista-faixas">
+                        ${album.faixas && album.faixas.length
+                                                ? album.faixas.map(f =>
+                                                        `<li data-trackid="${f.id}">
+                                            <span>${f.id}. ${f.nome}</span>
+                                            <span class="duracao">${f.duracao || ''}</span>
+                                            <div class="acoes-track position-relative d-inline-block">
+                                              <button class="btn btn-sm btn-dark menu-track-btn" data-trackid="${f.id}">⋮</button>
+                                              <div class="menu-opcoes-track bg-dark border rounded p-2 d-none" id="menu-track-${f.id}">
+                                                <button class="btn btn-warning btn-sm w-100 mb-1 edit-track-btn" data-trackid="${f.id}">✏️ Editar</button>
+                                                <button class="btn btn-danger btn-sm w-100 delete-track-btn" data-trackid="${f.id}">🗑️ Excluir</button>
+                                              </div>
+                                            </div>
+                                        </li>`
+                                                ).join('')
+                                                : '<li>Nenhuma faixa disponível.</li>'
+                                        }
+                    </ul>
+
+                    <button id="toggleAddForm" class="btn btn-outline-light btn-sm mb-2">+ Adicionar faixa</button>
+                    <div class="mt-3">
+                        <form id="formAddFaixa" class="d-flex flex-column gap-2 d-none">
+                            <input type="text" id="novaFaixaNome" placeholder="Nome da faixa" class="form-control form-control-sm" required>
+                            <input type="text" id="novaFaixaDuracao" placeholder="Duração (ex: 3:45)" class="form-control form-control-sm">
+                            <input type="text" id="novaFaixaStreams" placeholder="Streams (opcional)" class="form-control form-control-sm">
+                            <div class="d-flex gap-2">
+                              <button class="btn btn-primary btn-sm" type="submit" id="btnSubmitFaixa">Adicionar</button>
+                              <button type="button" class="btn btn-secondary btn-sm" id="btnCancelEdit" style="display:none">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 p-3 bg-dark rounded">
+                        <h4 class="text-center text-light mb-3">Streams</h4>
+                        <canvas id="graficoStreams" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                                // Após inserir o HTML, ligar os eventos: abrir formulário, editar e excluir faixas
+                                const toggleBtn = document.getElementById('toggleAddForm');
+                                const formAdd = document.getElementById('formAddFaixa');
+                                const btnSubmitFaixa = document.getElementById('btnSubmitFaixa');
+                                const btnCancelEdit = document.getElementById('btnCancelEdit');
+
+                                if (toggleBtn && formAdd) {
+                                    toggleBtn.addEventListener('click', () => {
+                                        const hidden = formAdd.classList.contains('d-none');
+                                        if (hidden) {
+                                            formAdd.classList.remove('d-none');
+                                            toggleBtn.textContent = 'Fechar formulário';
+                                            formAdd.reset();
+                                            delete formAdd.dataset.editing;
+                                            btnSubmitFaixa.textContent = 'Adicionar';
+                                            btnCancelEdit.style.display = 'none';
+                                        } else {
+                                            formAdd.classList.add('d-none');
+                                            toggleBtn.textContent = '+ Adicionar faixa';
+                                            formAdd.reset();
+                                            delete formAdd.dataset.editing;
+                                            btnSubmitFaixa.textContent = 'Adicionar';
+                                            btnCancelEdit.style.display = 'none';
+                                        }
+                                    });
+                                }
+
+                                if (formAdd) {
+                                    formAdd.addEventListener('submit', async (ev) => {
+                                        ev.preventDefault();
+                                        const nome = document.getElementById('novaFaixaNome').value.trim();
+                                        const duracao = document.getElementById('novaFaixaDuracao').value.trim();
+                                        const streams = document.getElementById('novaFaixaStreams').value.trim();
+                                        if (!nome) return alert('Informe o nome da faixa.');
+
+                                        const editing = formAdd.dataset.editing;
+                                        if (editing) {
+                                            if (window.atualizarFaixa) {
+                                                await window.atualizarFaixa(album.id, editing, { nome, duracao, streams });
+                                            } else {
+                                                alert('Função de atualizar faixa não disponível.');
+                                            }
+                                        } else {
+                                            if (window.adicionarFaixa) {
+                                                await window.adicionarFaixa(album.id, { nome, duracao, streams });
+                                            } else {
+                                                alert('Função de adicionar faixa não disponível.');
+                                            }
+                                        }
+                                    });
+
+                                    btnCancelEdit.addEventListener('click', () => {
+                                        delete formAdd.dataset.editing;
+                                        formAdd.reset();
+                                        formAdd.classList.add('d-none');
+                                        toggleBtn.textContent = '+ Adicionar faixa';
+                                        btnCancelEdit.style.display = 'none';
+                                        btnSubmitFaixa.textContent = 'Adicionar';
+                                    });
+                                }
+
+                                // Delegação para menus, editar e excluir
+                                const listaFaixas = document.getElementById('lista-faixas');
+                                if (listaFaixas) {
+                                    listaFaixas.addEventListener('click', async (ev) => {
+                                        const menuBtn = ev.target.closest('.menu-track-btn');
+                                        if (menuBtn) {
+                                            ev.stopPropagation();
+                                            const idTrack = menuBtn.dataset.trackid;
+                                            // fecha outros menus
+                                            document.querySelectorAll('.menu-opcoes-track').forEach(m => {
+                                                if (m.id !== `menu-track-${idTrack}`) m.classList.add('d-none');
+                                            });
+                                            const menu = document.getElementById(`menu-track-${idTrack}`);
+                                            if (menu) menu.classList.toggle('d-none');
+                                            return;
+                                        }
+
+                                        const editBtn = ev.target.closest('.edit-track-btn');
+                                        if (editBtn) {
+                                            ev.stopPropagation();
+                                            const trackId = editBtn.dataset.trackid;
+                                            const track = (album.faixas || []).find(f => String(f.id) === String(trackId));
+                                            if (!track) return alert('Faixa não encontrada.');
+                                            // Abre o formulário e popula para edição
+                                            formAdd.classList.remove('d-none');
+                                            toggleBtn.textContent = 'Fechar formulário';
+                                            document.getElementById('novaFaixaNome').value = track.nome || '';
+                                            document.getElementById('novaFaixaDuracao').value = track.duracao || '';
+                                            document.getElementById('novaFaixaStreams').value = track.streams || '';
+                                            formAdd.dataset.editing = trackId;
+                                            btnSubmitFaixa.textContent = 'Salvar';
+                                            btnCancelEdit.style.display = 'inline-block';
+                                            const menu = document.getElementById(`menu-track-${trackId}`);
+                                            if (menu) menu.classList.add('d-none');
+                                            return;
+                                        }
+
+                                        const delBtn = ev.target.closest('.delete-track-btn');
+                                        if (delBtn) {
+                                            ev.stopPropagation();
+                                            const trackId = delBtn.dataset.trackid;
+                                            if (window.excluirFaixa) await window.excluirFaixa(album.id, trackId);
+                                            return;
+                                        }
+                                    });
+                                }
+
+                                // Fecha menus de faixa ao clicar fora
+                                document.addEventListener('click', (e) => {
+                                    if (!e.target.closest('.acoes-track')) {
+                                        document.querySelectorAll('.menu-opcoes-track').forEach(m => m.classList.add('d-none'));
+                                    }
+                                });
+
+                // Gráfico (com tratamento de erros/dados ausentes)
+                const faixas = album.faixas || [];
+                const canvas = document.getElementById('graficoStreams');
+
+                if (!canvas) {
+                    console.warn('Canvas do gráfico não encontrado');
+                } else if (!faixas.length) {
+                    canvas.parentElement.innerHTML = '<p class="text-center text-light">Nenhuma faixa/stream disponível para exibir.</p>';
+                } else {
+                    const ctx = canvas.getContext('2d');
+                    const nomes = faixas.map(f => f.nome || '—');
+                    const valores = faixas.map(f => {
+                        const s = (f.streams || '').toString().replace(/,/g, '');
+                        const n = parseFloat(s);
+                        return isNaN(n) ? 0 : n / 1000000;
+                    });
+
+                    const hasPositive = valores.some(v => v > 0);
+                    if (!hasPositive) {
+                        canvas.parentElement.innerHTML = '<p class="text-center text-light">Sem dados de streams válidos para exibir.</p>';
+                    } else {
+                        // garantir uma altura visível para o canvas em layouts responsivos
+                        canvas.style.height = canvas.style.height || '320px';
+                        canvas.style.maxWidth = canvas.style.maxWidth || '700px';
+                        new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: nomes,
+                                datasets: [{
+                                    label: 'Streams (em milhões)',
+                                    data: valores,
+                                    backgroundColor: [
+                                        '#121896', '#040854', '#000CF5', '#020536', '#0E0F2E',
+                                        '#0E0F2E', '#010114', '#010114', '#5475F7', '#070C2B'
+                                    ],
+                                    borderColor: '#000',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                cutout: '60%',
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: {
+                                        position: 'right',
+                                        labels: {
+                                            color: '#fff',
+                                            font: { size: 12 }
+                                        }
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: (context) => `${context.label}: ${context.parsed.toFixed(1)}M`
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+
+
+            } catch (erro) {
+                console.error(erro);
+                tela.innerHTML = '<p>Erro ao carregar informações do álbum. Verifique se o JSON Server está rodando e se o id existe.</p>';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

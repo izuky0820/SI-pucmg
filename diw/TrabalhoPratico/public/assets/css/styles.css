@@ -1,0 +1,831 @@
+body {
+  background-color: #111;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #eee;
+  margin: 0;
+}
+
+.actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+#campoBusca {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #222;
+  color: #fff;
+}
+
+
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #151510;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.topbar .actions button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+  padding: 8px;
+  transition: color 0.3s;
+}
+
+.hamburger-btn:hover {
+  color: rgb(37, 3, 230);
+}
+
+.logo img {
+  width: 160px; 
+  height: auto;
+  margin-top: 70px;
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100px;
+  background-color: #151510;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.close-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  align-self: flex-end;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+.close-menu-btn:hover {
+  color: rgb(37, 3, 230);
+}
+
+
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar ul li {
+  width: 100%;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #ccc;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+  transition: 0.3s;
+  padding: 8px 0;
+}
+
+.sidebar ul li a i {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.sidebar ul li a:hover {
+  color: #1e0366;
+}
+
+.sidebar ul li a.active {
+  background-color: #3b3f1d;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.sidebar ul li a span {
+  font-size: 14px;
+  margin-top: 2px;
+}
+
+#carouselExampleCaptions {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+#carouselExampleCaptions img {
+  height: 300px;
+  width: 100%;
+  object-fit: contain;
+  background-color: #000;
+}
+
+
+main {
+  margin-left: 100px;
+  padding: 20px;
+  padding-top: 80px;
+}
+
+section {
+  align-content: center;
+}
+
+.Textos {
+  color: white;
+}
+
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.botoes button {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s;
+}
+
+.botoes button:hover {
+  background: rgb(37, 3, 230);
+}
+
+.botoes button i {
+  font-size: 16px;
+}
+
+
+.destaques {
+  margin-left: 0;
+  padding: 0 20px;
+}
+
+.destaques h2,
+.subtitulo {
+  color: #fff;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.subtitulo {
+  font-size: 18px;
+  color: #ccc;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+#destaques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 15px;
+  padding: 10px 0;
+}
+
+#destaques .col-md-4 {
+  width: 100%;
+}
+
+#destaques .card {
+  transform: scale(0.9);
+  transition: 0.3s;
+}
+
+#destaques .card:hover {
+  transform: scale(1);  
+}
+
+
+.album {
+  display: flex;
+  align-items: center;
+  background: #1e1e1b;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 10px;
+}
+
+.album .info {
+  flex: 1;
+}
+
+.album h3 {
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+
+.album .status {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.album .rating {
+  margin-right: 15px;
+  color: gold;
+  font-size: 14px;
+}
+
+.album-cover img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+footer {
+  margin-top: 0;
+  padding: 30px 20px;
+  border-top: 1px solid #333;
+  background-color: #111;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  gap: 40px;
+  text-align: left;
+}
+
+.FooterText p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.FooterText a {
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+
+.FooterText a i {
+  margin-right: 8px;
+}
+
+.FooterText a:hover {
+  color: rgb(37, 3, 230);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #777;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+form {
+  width: 250px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.config-menu {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.dropdown-options {
+  position: absolute;
+  right: 0;
+  top: 30px;
+  width: 120px;
+  z-index: 10;
+}
+
+.dropdown-options button {
+  font-size: 0.9rem;
+}
+
+.dropdown-options.d-none {
+  display: none;
+}
+
+/* Seção do formulário */
+#novoAlbum {
+  background-color: #181818;
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 600px;
+  border: 1px solid #242424;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+#novoAlbum h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #cfcfcf;
+  margin-bottom: 1.5rem;
+}
+
+#formAlbum {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+#formAlbum input,
+#formAlbum textarea {
+  width: 100%;
+  background-color: #101010;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #eee;
+  padding: 10px 14px;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s, background-color 0.3s;
+  box-sizing: border-box; 
+}
+
+/* Foco no campo */
+#formAlbum input:focus,
+#formAlbum textarea:focus {
+  border-color:  rgb(37, 3, 230); 
+  background-color: #161616;
+  outline: none;
+}
+
+/* Botão principal */
+#formAlbum button {
+  width: 100%;
+  background-color: rgb(37, 3, 230);
+  color: #111;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  transition: background-color 0.3s, transform 0.2s;
+  box-sizing: border-box;
+}
+
+/* Efeito hover no botão */
+#formAlbum button:hover {
+  background-color: rgba(37, 3, 230, 0.795);
+  transform: scale(1.02);
+}
+
+/* --- Menu de três pontinhos --- */
+.acoes {
+  z-index: 10;
+}
+
+.menu-btn {
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 2px 6px;
+  background: transparent;
+}
+
+.menu-btn:hover {
+  color: #ffc107;
+  transform: scale(1.2);
+  transition: 0.2s;
+}
+
+.menu-opcoes {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  width: 130px;
+  background-color: #1e1e1e;
+  border: 1px solid #444;
+  border-radius: 8px;
+  z-index: 100;
+}
+
+.menu-opcoes button {
+  font-size: 0.9rem;
+}
+
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+
+  .hamburger-btn {
+    display: block;
+  }
+
+  .sidebar {
+    width: 250px;
+    left: -250px;
+    padding-top: 10px;
+    align-items: flex-start;
+    padding-left: 15px;
+  }
+
+  .sidebar.mobile-open {
+    left: 0;
+  }
+
+  .close-menu-btn {
+    display: block;
+  }
+
+  main,
+  #tela {
+    margin-left: 0;
+    margin-top: 0;
+    padding: 20px;
+    padding-top: 80px;
+  }
+
+  .destaques {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  #carouselExampleCaptions {
+    max-width: 95%;
+  }
+
+  #carouselExampleCaptions img {
+    max-height: 200px;
+  }
+
+  .logo img {
+    width: 140px;
+  }
+}
+
+
+
+
+@media (max-width: 415px) {
+
+  .topbar {
+    height: 55px;
+  }
+
+  main,
+  #tela {
+    margin-top: 0;
+    padding: 15px;
+    padding-top: 65px;
+  }
+
+  #carouselExampleCaptions img {
+    max-height: 160px;
+  }
+
+  .hamburger-btn {
+    font-size: 22px;
+  }
+
+  .sidebar {
+    width: 220px;
+    left: -220px;
+  }
+}
+
+
+@media (min-width: 1600px) {
+
+  main,
+  #tela {
+    margin-left: 120px;
+    padding: 40px;
+  }
+
+  #carouselExampleCaptions {
+    max-width: 850px;
+  }
+
+  #carouselExampleCaptions img {
+    max-height: 330px;
+  }
+}
+
+@media (min-width: 1920px) {
+
+  body {
+    font-size: 16px;
+  }
+
+  .topbar {
+    padding: 15px 30px;
+    height: 70px;
+  }
+
+  .hamburger-btn {
+    font-size: 28px;
+    padding: 10px 15px;
+  }
+
+  .topbar .actions button {
+    font-size: 20px;
+  }
+
+  #campoBusca {
+    padding: 8px 15px;
+    font-size: 16px;
+  }
+
+  .logo img {
+    width: 180px;
+    margin-top: 80px;
+  }
+
+  .sidebar {
+    width: 130px;
+    padding-top: 30px;
+  }
+
+  .sidebar ul li {
+    margin: 20px 0;
+  }
+
+  .sidebar ul li a {
+    font-size: 15px;
+    padding: 10px 0;
+  }
+
+  .sidebar ul li a i {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  main {
+    margin-left: 130px;
+    padding: 40px;
+    padding-top: 90px;
+  }
+
+  section h1 {
+    font-size: 32px;
+  }
+
+  section h2 {
+    font-size: 28px;
+  }
+
+  #carouselExampleCaptions {
+    max-width: 950px;
+    margin: 30px auto;
+  }
+
+  #carouselExampleCaptions img {
+    max-height: 400px;
+  }
+
+  .card {
+    margin-bottom: 0;
+  }
+
+  .card-title {
+    font-size: 18px;
+  }
+
+  .card-text {
+    font-size: 16px;
+  }
+
+  #destaques {
+    gap: 15px !important;
+  }
+
+  footer {
+    padding: 30px 40px;
+    font-size: 16px;
+  }
+
+  .FooterText p {
+    font-size: 18px;
+  }
+
+  #novoAlbum {
+    max-width: 700px;
+    padding: 40px;
+  }
+
+  #novoAlbum h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  #formAlbum input,
+  #formAlbum textarea {
+    padding: 12px 16px;
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+
+  #formAlbum button {
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 2560px) {
+
+  body {
+    font-size: 18px;
+  }
+
+  .topbar {
+    padding: 18px 40px;
+    height: 80px;
+  }
+
+  .hamburger-btn {
+    font-size: 32px;
+    padding: 12px 20px;
+  }
+
+  .topbar .actions button {
+    font-size: 24px;
+  }
+
+  #campoBusca {
+    padding: 10px 18px;
+    font-size: 18px;
+  }
+
+  .logo img {
+    width: 220px;
+    margin-top: 90px;
+  }
+
+  .sidebar {
+    width: 160px;
+    padding-top: 40px;
+  }
+
+  .sidebar ul li {
+    margin: 25px 0;
+  }
+
+  .sidebar ul li a {
+    font-size: 17px;
+    padding: 12px 0;
+  }
+
+  .sidebar ul li a i {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  main {
+    margin-left: 160px;
+    padding: 50px;
+    padding-top: 100px;
+  }
+
+  section h1 {
+    font-size: 40px;
+  }
+
+  section h2 {
+    font-size: 36px;
+  }
+
+  #carouselExampleCaptions {
+    max-width: 1100px;
+    margin: 40px auto;
+  }
+
+  #carouselExampleCaptions img {
+    max-height: 500px;
+  }
+
+  .card {
+    margin-bottom: 0;
+  }
+
+  .card-title {
+    font-size: 20px;
+  }
+
+  .card-text {
+    font-size: 18px;
+  }
+
+  #destaques {
+    gap: 10px !important;
+  }
+
+  footer {
+    padding: 40px 50px;
+    font-size: 18px;
+  }
+
+  .FooterText p {
+    font-size: 20px;
+  }
+
+  #novoAlbum {
+    max-width: 800px;
+    padding: 50px;
+  }
+
+  #novoAlbum h3 {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  #formAlbum input,
+  #formAlbum textarea {
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  #formAlbum button {
+    padding: 14px;
+    font-size: 1.2rem;
+  }
+}
