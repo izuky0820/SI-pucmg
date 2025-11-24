@@ -307,7 +307,7 @@ async function editarAlbum(id) {
     document.getElementById("editNome").value = album.album;
     document.getElementById("editAno").value = album.lancamento;
     document.getElementById("editImagem").value = album.imagem;
-    document.getElementById("editInfo").value = album.informacoes || ""; // Garante que não dê erro se não tiver info
+    document.getElementById("editInfo").value = album.informacoes || "";
 
     if (editarModal) {
       editarModal.show();
@@ -354,12 +354,43 @@ async function excluirAlbum(id) {
   }
 }
 
+function configurarBotaoLogin() {
+  const btnAuth = document.getElementById("btnAuth");
+  
+  if (!btnAuth) return;
+
+  const usuario = getUsuarioAtual(); 
+
+  if (usuario) {
+    btnAuth.textContent = "Sair";
+    btnAuth.href = "#"; 
+    
+ 
+    btnAuth.onclick = (e) => {
+      e.preventDefault();
+      if(confirm("Deseja realmente sair?")) {
+        localStorage.removeItem("usuarioLogado");
+        window.location.reload(); 
+      }
+    };
+    const msgOla = document.getElementById("msgOla");
+    if(msgOla) msgOla.textContent = `Olá, ${usuario.nome}!`;
+
+  } else {
+
+    btnAuth.textContent = "Login";
+    btnAuth.href = "login.html"; 
+    btnAuth.onclick = null; 
+  }
+}
+
 // --- Inicialização ---
 document.addEventListener("DOMContentLoaded", () => {
   configurarBusca();
   carregarDestaques();
   if (document.getElementById("listaFavoritos")) carregarFavoritos();
   carregarFooter();
+  configurarBotaoLogin();
   const modalElement = document.getElementById('editarModal');
   if (modalElement) {
     if (typeof bootstrap !== 'undefined') {
