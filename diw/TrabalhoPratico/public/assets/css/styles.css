@@ -491,6 +491,82 @@ label {
 }
 
 
+/*favoritos*/
+
+.favoritar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 10;
+}
+
+.fav-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.fav-icon:hover {
+    transform: scale(1.2);
+}
+
+.fav-icon.clicked {
+    transform: scale(1.4);
+}
+
+.fav-icon i.fa-solid {
+    color: red !important;
+}
+
+#listaFavoritos {
+    margin-left: 120px; 
+    padding: 20px;
+}
+
+#listaFavoritos .card-album {
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: #181818;
+}
+
+#listaFavoritos .card-album:hover {
+    transform: scale(1.04);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.15);
+}
+
+#listaFavoritos .card-img-top {
+    height: 250px; 
+    object-fit: cover;
+}
+
+#listaFavoritos .col-md-4,
+#listaFavoritos .col-md-3 {
+   padding: 10px;
+}
+
+#listaFavoritos .card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+#listaFavoritos .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+#listaFavoritos .card-text {
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
 
 
 /* Responsividade */
@@ -542,6 +618,15 @@ label {
   }
 }
 
+@media (max-width: 500px) {
+    #listaFavoritos .card-img-top {
+        height: 180px;
+    }
+
+    #listaFavoritos {
+        margin-top: 70px;
+    }
+}
 
 
 

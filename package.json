@@ -1,0 +1,21 @@
+{
+  "name": "si-pucmg",
+  "version": "1.0.0",
+  "description": "Este repositório contém exercícios e projetos desenvolvidos durante as disciplinas da faculdade, organizados por listas e temas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/izuky0820/SI-pucmg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/izuky0820/SI-pucmg/issues"
+  },
+  "homepage": "https://github.com/izuky0820/SI-pucmg#readme"
+}
