@@ -1,4 +1,5 @@
 {
+  "usuarios": [],
   "destaque": [
     {
       "id": "1",
@@ -354,6 +355,12 @@
           "streams": "594,714,637"
         }
       ]
+    },
+    {
+      "nome": "nome",
+      "email": "nome@gmail.com",
+      "senha": "1234",
+      "id": "UT26O4r"
     }
   ]
 }
