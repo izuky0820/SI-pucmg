@@ -1,93 +1,166 @@
+:root {
+  --primary-color: rgb(37, 3, 230);
+  --primary-hover: rgba(37, 3, 230, 0.85);
+  --bg-body: #111;
+  --bg-container: #ffffff;
+  --text-main: #333;
+  --text-light: #eee;
+  --input-bg: #faf7f7;
+  --input-focus-bg: #fff;
+}
+
+* {
+  box-sizing: border-box; 
+}
+
 body {
-    background-color: #111;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: #eee;
-    margin: 0;
+  background-color: var(--bg-body);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-light);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;     
+  padding: 20px;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 500px; 
+  background-color: var(--bg-container);
+  border-radius: 30px;
+  padding: 60px 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
 }
 
 .container h1 {
-    font-size: 58px;
-    font-weight: 900;
-    color: rgb(37, 3, 230);
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-
-#formCadastro {
-    width: 100%;
-    box-sizing: border-box;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  color: var(--primary-color);
+  letter-spacing: 1px;
+  margin: 0 0 30px 0;
+  text-align: center;
+  line-height: 1.1;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 
 form input[type="text"],
 form input[type="email"],
-form input[type="password"] {
-  width: 100%;
-  max-width: 400px;
-  background-color: #faf7f7;
-  border: none;
-  border-radius: 50px;
-  padding: 16px 24px;
-  margin-bottom: 18px;
-  font-size: 18px;
-  color: #000;
-  
-}
-
-
-#formCadastro input:focus {
-    border-color: rgb(37, 3, 230);
-    background-color:#808080;
-    outline: none;
-}
-
+form input[type="password"],
 form input[type="submit"],
 form button {
   width: 100%;
-  max-width: 400px;
+  border-radius: 50px;
+  padding: 16px 24px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none; 
+}
+
+/* Campos de Texto */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  background-color: var(--input-bg);
+  border: 2px solid transparent;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+
+form input:focus {
+  background-color: var(--input-focus-bg);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(37, 3, 230, 0.1); 
+  color: #000;
+}
+
+/* Botões */
+form input[type="submit"],
+form button {
   background-color: #000;
   color: #fff;
-  font-size: 20px;
   font-weight: 700;
   border: none;
-  border-radius: 50px;
-  padding: 16px;
   margin-top: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
 }
 
 form input[type="submit"]:hover,
 form button:hover {
-  background-color: #222;
+  background-color: var(--primary-color);
+  transform: translateY(-2px); 
+  box-shadow: 0 5px 15px rgba(37, 3, 230, 0.4);
 }
 
-#formCadastro button:hover {
-    background-color: rgba(37, 3, 230, 0.795);
-    transform: scale(1.02);
+form input[type="submit"]:active,
+form button:active {
+  transform: scale(0.98);
 }
 
 .links {
-    margin-top: 30px;
-    text-align: center;
+  margin-top: 25px;
+  text-align: center;
+  width: 100%;
+}
+
+.links a {
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+  color: #666; 
+  font-weight: 500;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.links a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVIDADE 
+   ========================================= */
+@media (max-width: 600px) {
+  body {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .container {
+    max-width: 100%;
+    border-radius: 0; 
+    border-top-left-radius: 40px; 
+    border-top-right-radius: 40px;
+    padding: 50px 25px 40px 25px;
+    min-height: 60vh; 
+  }
+
+  .container h1 {
+    margin-bottom: 25px;
   }
   
-  .links a {
-    display: block;
-    text-decoration: none;
-    font-size: 16px;
-    color: rgba(37, 3, 230, 0.795); 
-    font-weight: 500;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"] {
+    padding: 18px 20px;
   }
-  
-  .links a:hover {
-    text-decoration: underline;
-  }
+}

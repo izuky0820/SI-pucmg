@@ -1,7 +1,7 @@
 // =============================================================
 // CONFIG GLOBAL
 // =============================================================
-const API_URL = "http://localhost:3000/usuarios";
+const API_USERS = "http://localhost:3000/usuarios";
 
 /* =============================================================
    CADASTRO 
@@ -13,14 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
         formCadastro.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const nome = document.getElementById('nome').value;
+            const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim().toLowerCase();
-            const senha = document.getElementById('senha').value;
-
-            const novoUsuario = { nome, email, senha };
+            const senha = document.getElementById('senha').value.trim();
+            const novoUsuario = {
+                nome,
+                email,
+                senha,
+                tipo: "comum"
+            };
 
             try {
-                const checkResponse = await fetch(`${API_URL}?email=${encodeURIComponent(email)}`);
+                const checkResponse = await fetch(`${API_USERS}?email=${encodeURIComponent(email)}`);
                 const checkData = await checkResponse.json();
 
                 if (checkData.length > 0) {
@@ -28,17 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                const response = await fetch(API_URL, {
+                await fetch(API_USERS, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(novoUsuario)
                 });
-
-                if (!response.ok) {
-                    throw new Error('Falha na comunicação com o servidor');
-                }
 
                 alert("Cadastro realizado com sucesso!");
                 window.location.href = 'login.html';
@@ -60,42 +58,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (formLogin) {
         formLogin.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
-            const emailRaw = document.getElementById("email").value.trim();
-            const senhaRaw = document.getElementById("senha").value.trim();
-            
-            if (!emailRaw || !senhaRaw) {
-                alert("Preencha todos os campos!");
-                return;
-            }
 
-            const email = emailRaw.toLowerCase();
-            const emailEncoded = encodeURIComponent(email);
-            const senhaEncoded = encodeURIComponent(senhaRaw);
+            const email = document.getElementById("email").value.trim().toLowerCase();
+            const senha = document.getElementById("senha").value.trim();
 
             try {
-                const urlBusca = `${API_URL}?email=${emailEncoded}&senha=${senhaEncoded}`;
-                const response = await fetch(urlBusca);
+                const response = await fetch(`${API_USERS}?email=${email}&senha=${senha}`);
                 const usuarios = await response.json();
 
                 if (usuarios.length === 0) {
-                    const checkEmailResp = await fetch(`${API_URL}?email=${emailEncoded}`);
-                    const checkEmailData = await checkEmailResp.json();
-                    
-                    if(checkEmailData.length > 0) {
-                        alert("Senha incorreta!");
-                    } else {
-                        alert("E-mail não encontrado. Cadastre-se primeiro.");
-                    }
+                    alert("Email ou senha incorretos!");
                     return;
                 }
-                const usuario = usuarios[0];
 
-                localStorage.setItem("usuarioLogado", JSON.stringify(usuario)); 
+                const usuario = usuarios[0]; // AGORA EXISTE
+
+                // SALVA CORRETAMENTE
+                localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
 
                 alert("Login realizado com sucesso!");
-        
-                window.location.href = 'index.html'; 
+                window.location.href = "index.html";
 
             } catch (error) {
                 console.error("Erro no login:", error);

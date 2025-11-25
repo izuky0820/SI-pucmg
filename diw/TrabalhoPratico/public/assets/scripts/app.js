@@ -2,8 +2,7 @@ const API_URL = window.location.hostname === 'localhost'
   ? "http://localhost:3000/destaque"
   : "/api/destaque";
 
-// Variável global para o modal de edição
-let editarModal; 
+let editarModal;
 
 // ==========================
 // FOOTER
@@ -28,7 +27,7 @@ function carregarFooter() {
   if (!container) return;
   let contatosHtml = '';
   dadosFooter.Contato.forEach(item => {
-    const chave = Object.keys(item)[0]; 
+    const chave = Object.keys(item)[0];
     const valor = item[chave];
     contatosHtml += `<p class="mb-1"><strong class="text-white">${chave}:</strong> ${valor}</p>`;
   });
@@ -67,7 +66,18 @@ function carregarFooter() {
 
 // --- Usuário logado ---
 function getUsuarioAtual() {
-  return JSON.parse(localStorage.getItem("usuarioLogado")) || null;
+  const userRaw = localStorage.getItem("usuarioLogado");
+  if (!userRaw || userRaw === "undefined") {
+    return null;
+  }
+  try {
+    return JSON.parse(userRaw);
+  } catch (error) {
+
+    console.error("Erro ao ler usuário:", error);
+    localStorage.removeItem("usuarioLogado");
+    return null;
+  }
 }
 
 function getUserFavoritos() {
@@ -89,7 +99,12 @@ function isFavorito(id) {
 function toggleFavorito(id) {
   let favs = getUserFavoritos();
   const icon = document.querySelector(`.fav-icon[data-id="${id}"]`);
-  
+  const user = getUsuarioAtual();
+  if (!user) {
+    alert("Você precisa estar logado para favoritar álbuns.");
+    window.location.href = "login.html";
+    return;
+  }
   // Animação do clique
   if (icon) {
     icon.classList.add("clicked");
@@ -106,10 +121,11 @@ function toggleFavorito(id) {
 
 function atualizarCoracoes() {
   const favoritos = getUserFavoritos();
+
   document.querySelectorAll(".fav-icon").forEach(icon => {
-    const id = Number(icon.dataset.id);
+    const id = String(icon.dataset.id);
     icon.innerHTML = favoritos.includes(id)
-      ? `<i class="fa-solid fa-heart"></i>`
+      ? `<i class="fa-solid fa-heart text-danger"></i>`
       : `<i class="fa-regular fa-heart"></i>`;
   });
 }
@@ -160,13 +176,13 @@ async function carregarFavoritos() {
       </div>`;
     container.appendChild(col);
   });
-
   document.querySelectorAll(".btn-remove-fav").forEach(btn => {
     btn.addEventListener("click", e => {
       e.stopPropagation();
-      removerFavorito(Number(btn.dataset.id));
+      removerFavorito(String(btn.dataset.id));
     });
   });
+
   document.querySelectorAll("#listaFavoritos .card-album").forEach(card => {
     card.addEventListener("click", e => {
       if (!e.target.closest(".btn-remove-fav")) {
@@ -175,10 +191,10 @@ async function carregarFavoritos() {
     });
   });
 }
-
 function removerFavorito(id) {
   let favs = getUserFavoritos();
-  favs = favs.filter(f => f !== id);
+  favs = favs.filter(f => String(f) !== String(id));
+  
   setUserFavoritos(favs);
   atualizarCoracoes();
   carregarFavoritos();
@@ -219,25 +235,32 @@ async function carregarDestaques() {
   const destaque = await resp.json();
 
   container.innerHTML = "";
+  const usuario = getUsuarioAtual();
+  const isAdmin = usuario && usuario.tipo === "admin";
 
   destaque.forEach(album => {
     const col = document.createElement("div");
-    col.className = "col-md-4";
-    col.innerHTML = `
-      <div class="card bg-dark text-white h-100 card-album" style="cursor:pointer; position:relative;">
-        
+    col.className = "col-md-4 mb-4";
+    let menuAdminHtml = "";
+    if (isAdmin) {
+      menuAdminHtml = `
         <div class="acoes position-absolute top-0 end-0 m-2" style="z-index: 10;">
           <button class="btn btn-dark btn-sm menu-btn" data-id="${album.id}">⋮</button>
           <div class="menu-opcoes bg-dark border rounded p-2 d-none" id="menu-${album.id}" style="position: absolute; right: 0; min-width: 100px;">
             <button class="btn btn-warning btn-sm w-100 mb-1 edit-btn" data-id="${album.id}">Editar</button>
             <button class="btn btn-danger btn-sm w-100 delete-btn" data-id="${album.id}">Excluir</button>
           </div>
-        </div>
+        </div>`;
+    }
 
-        <img src="${album.imagem}" class="card-img-top" alt="${album.album}">
+    col.innerHTML = `
+      <div class="card bg-dark text-white h-100 card-album" style="cursor:pointer; position:relative;">
+        
+        ${menuAdminHtml} <img src="${album.imagem}" class="card-img-top" alt="${album.album}">
         <div class="card-body">
           <h5 class="card-title">${album.album}</h5>
           <p class="card-text">Lançamento: ${album.lancamento}</p>
+          
           <div class="fav-icon" data-id="${album.id}" style="font-size: 1.5rem; cursor: pointer;">
             <i class="fa-regular fa-heart"></i>
           </div>
@@ -246,43 +269,42 @@ async function carregarDestaques() {
 
     container.appendChild(col);
 
+    if (isAdmin) {
+      const menuBtn = col.querySelector(".menu-btn");
+      const menuOpcoes = col.querySelector(`#menu-${album.id}`);
 
-    // 1. Abrir/Fechar Menu
-    const menuBtn = col.querySelector(".menu-btn");
-    const menuOpcoes = col.querySelector(`#menu-${album.id}`);
-    
-    menuBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      document.querySelectorAll('.menu-opcoes').forEach(m => {
-        if(m.id !== `menu-${album.id}`) m.classList.add('d-none');
+      menuBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.menu-opcoes').forEach(m => {
+          if (m.id !== `menu-${album.id}`) m.classList.add('d-none');
+        });
+        menuOpcoes.classList.toggle("d-none");
       });
-      menuOpcoes.classList.toggle("d-none");
-    });
 
-    // 2. Botão Editar
-    const btnEdit = col.querySelector(".edit-btn");
-    btnEdit.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menuOpcoes.classList.add("d-none"); 
-      editarAlbum(album.id);
-    });
+      col.querySelector(".edit-btn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        menuOpcoes.classList.add("d-none");
+        editarAlbum(album.id);
+      });
 
-    // 3. Botão Excluir
-    const btnDelete = col.querySelector(".delete-btn");
-    btnDelete.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menuOpcoes.classList.add("d-none");
-      excluirAlbum(album.id);
-    });
+      col.querySelector(".delete-btn").addEventListener("click", (e) => {
+        e.stopPropagation();
+        menuOpcoes.classList.add("d-none");
+        excluirAlbum(album.id);
+      });
+    }
 
-    // 4. Botão Favorito
+    // Botão Favorito (Lógica de proteção já estava boa, mantendo aqui)
     const favIcon = col.querySelector(".fav-icon");
     favIcon.addEventListener("click", (e) => {
-      e.stopPropagation(); 
-      toggleFavorito(album.id);
+      e.stopPropagation();
+      toggleFavorito(album.id); // Essa função já verifica se está logado e redireciona
     });
+
+    // Clique no Card (abrir detalhes)
     const cardElement = col.querySelector(".card-album");
     cardElement.addEventListener("click", (e) => {
+      // Evita abrir detalhes se clicou no menu ou no coração
       if (!e.target.closest('.acoes') && !e.target.closest('.fav-icon')) {
         abrirAlbum(album.id);
       }
@@ -291,6 +313,8 @@ async function carregarDestaques() {
 
   atualizarCoracoes();
 }
+
+
 
 // --- Abrir detalhes ---
 function abrirAlbum(id) {
@@ -356,31 +380,31 @@ async function excluirAlbum(id) {
 
 function configurarBotaoLogin() {
   const btnAuth = document.getElementById("btnAuth");
-  
+
   if (!btnAuth) return;
 
-  const usuario = getUsuarioAtual(); 
+  const usuario = getUsuarioAtual();
 
   if (usuario) {
     btnAuth.textContent = "Sair";
-    btnAuth.href = "#"; 
-    
- 
+    btnAuth.href = "#";
+
+
     btnAuth.onclick = (e) => {
       e.preventDefault();
-      if(confirm("Deseja realmente sair?")) {
+      if (confirm("Deseja realmente sair?")) {
         localStorage.removeItem("usuarioLogado");
-        window.location.reload(); 
+        window.location.reload();
       }
     };
     const msgOla = document.getElementById("msgOla");
-    if(msgOla) msgOla.textContent = `Olá, ${usuario.nome}!`;
+    if (msgOla) msgOla.textContent = `Olá, ${usuario.nome}!`;
 
   } else {
 
     btnAuth.textContent = "Login";
-    btnAuth.href = "login.html"; 
-    btnAuth.onclick = null; 
+    btnAuth.href = "login.html";
+    btnAuth.onclick = null;
   }
 }
 
@@ -394,9 +418,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalElement = document.getElementById('editarModal');
   if (modalElement) {
     if (typeof bootstrap !== 'undefined') {
-        editarModal = new bootstrap.Modal(modalElement);
+      editarModal = new bootstrap.Modal(modalElement);
     } else {
-        console.error("Bootstrap JS não foi carregado!");
+      console.error("Bootstrap JS não foi carregado!");
     }
+  }
+  const usuario = getUsuarioAtual();
+  const btnAddAlbum = document.getElementById("btnAdicionarAlbum");
+  if (btnAddAlbum && usuario && usuario.tipo === "admin") {
+    btnAddAlbum.classList.remove("d-none");
   }
 });
