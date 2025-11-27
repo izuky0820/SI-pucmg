@@ -13,6 +13,13 @@
       "senha": "1234",
       "tipo": "comum",
       "id": "pqAAgB2"
+    },
+    {
+      "id": "6ff7",
+      "nome": "Usuario",
+      "email": "usuario@gmail.com",
+      "senha": "12345",
+      "tipo": "comum"
     }
   ],
   "destaque": [
@@ -29,61 +36,71 @@
           "id": 1,
           "nome": "Skinny",
           "duracao": "3:39",
-          "streams": "332,073,471"
+          "streams": "332,073,471",
+          "spotify_id": "1CsMKhwEmNnmvHUuO5nryA"
         },
         {
           "id": 2,
           "nome": "Lunch",
           "duracao": "2:59",
-          "streams": "897,277,345"
+          "streams": "897,277,345",
+          "spotify_id": "629DixmZGHc7ILtEntuiWE"
         },
         {
           "id": 3,
           "nome": "Chihiro",
           "duracao": "5:02",
-          "streams": "1,025,434,369"
+          "streams": "1,025,434,369",
+          "spotify_id": "7BRD7x5pt8Lqa1eGYC4dzj"
         },
         {
           "id": 4,
           "nome": "Birds of a Feather",
           "duracao": "3:30",
-          "streams": "3,206,020,120"
+          "streams": "3,206,020,120",
+          "spotify_id": "6dOtVTDdiauQNBQEDOtlAB"
         },
         {
           "id": 5,
           "nome": "Wildflower",
           "duracao": "4:22",
-          "streams": "1,655,901,876"
+          "streams": "1,655,901,876",
+          "spotify_id": "3QaPy1KgI7nu9FJEQUgn6h"
         },
         {
           "id": 6,
           "nome": "The Greatest",
           "duracao": "5:00",
-          "streams": "447,619,555"
+          "streams": "447,619,555",
+          "spotify_id": "6TGd66r0nlPaYm3KIoI7ET"
         },
         {
           "id": 7,
           "nome": "L’amour de ma vie",
           "duracao": "6:00",
-          "streams": "465,864,737"
+          "streams": "465,864,737",
+          "spotify_id": "6fPan2saHdFaIHuTSatORv"
         },
         {
           "id": 8,
           "nome": "The Diner",
           "duracao": "3:07",
-          "streams": "288,285,459"
+          "streams": "288,285,459",
+          "spotify_id": "1LLUoftvmTjVNBHZoQyveF"
         },
         {
           "id": 9,
           "nome": "Bittersuite",
           "duracao": "5:11",
-          "streams": "250,548,374"
+          "streams": "250,548,374",
+          "spotify_id": "7DpUoxGSdlDHfqCYj0otzU"
         },
         {
           "id": 10,
           "nome": "Blue",
           "duracao": "4:33",
-          "streams": "472,626,638"
+          "streams": "472,626,638",
+          "spotify_id": "2prqm9sPLj10B4Wg0wE5x9"
         }
       ]
     },
@@ -100,97 +117,113 @@
           "id": 1,
           "nome": "Getting Older",
           "duracao": "4:04",
-          "streams": "333,603,449"
+          "streams": "333,603,449",
+          "spotify_id": "4HOryCnbme0zBnF8LWij3f"
         },
         {
           "id": 2,
           "nome": "I Didn't Change My Number",
           "duracao": "2:38",
-          "streams": "302,405,927"
+          "streams": "302,405,927",
+          "spotify_id": "7bcy34fBT2ap1L4bfPsl9q?"
         },
         {
           "id": 3,
           "nome": "Billie Bossa Nova",
           "duracao": "3:17",
-          "streams": "478,877,569"
+          "streams": "478,877,569",
+          "spotify_id": "2KnuaZYoGzDoHiBTNYOTXG"
         },
         {
           "id": 4,
           "nome": "my future",
           "duracao": "3:30",
-          "streams": "565,786,419"
+          "streams": "565,786,419",
+          "spotify_id": "3YUMWmx8EJq0DurfuIwoGh"
         },
         {
           "id": 5,
           "nome": "Oxytocin",
           "duracao": "3:30",
-          "streams": "277,441,613"
+          "streams": "277,441,613",
+          "spotify_id": "4t2OeILB07eMGTXSUbMPEu"
         },
         {
           "id": 6,
           "nome": "GOLDWING",
           "duracao": "2:32",
-          "streams": "162,347,072"
+          "streams": "162,347,072",
+          "spotify_id": "0FfqyjhB6Kspvit1oOo7ax?"
         },
         {
           "id": 7,
           "nome": "Lost Cause",
           "duracao": "3:32",
-          "streams": "384,482,284"
+          "streams": "384,482,284",
+          "spotify_id": "4191RXFPa7Ge9XkA4cWlna"
         },
         {
           "id": 8,
           "nome": "Halley’s Comet",
           "duracao": "3:55",
-          "streams": "415,378,777"
+          "streams": "415,378,777",
+          "spotify_id": "5XsAal7ZcWg1I5T4NcRjkv"
         },
         {
           "id": 9,
           "nome": "Not My Responsibility",
           "duracao": "3:48",
-          "streams": "150,734,857"
+          "streams": "150,734,857",
+          "spotify_id": "4T2zre0jqstNJ5Gt0WG9lz"
         },
         {
           "id": 10,
           "nome": "OverHeated",
           "duracao": "3:34",
-          "streams": "137,701,028"
+          "streams": "137,701,028",
+          "spotify_id": "5uSG6fUPRaehaV820zcpsK"
         },
         {
           "id": 11,
           "nome": "Everybody Dies",
           "duracao": "3:27",
-          "streams": "152,840,262"
+          "streams": "152,840,262",
+          "spotify_id": "5jhBwnqzNNrENXnYrAdoCe"
         },
         {
           "id": 12,
           "nome": "Your Power",
           "duracao": "4:06",
-          "streams": "526,200,985"
+          "streams": "526,200,985",
+          "spotify_id": "042Sl6Mn83JHyLEqdK7uI0"
         },
         {
           "id": 13,
           "nome": "NDA",
           "duracao": "3:16",
-          "streams": "473,093,762"
+          "streams": "473,093,762",
+          "spotify_id": "38GBNKZUhfBkk3oNlWzRYd"
         },
         {
           "id": 14,
           "nome": "Therefore I Am",
           "duracao": "2:53",
-          "streams": "956,449,116"
+          "streams": "956,449,116",
+          "spotify_id": "20R4HfKloPKgXDqU7UKk3x"
         },
         {
           "id": 15,
           "nome": "Happier Than Ever",
           "duracao": "4:59",
-          "streams": "1,712,987,340"
+          "streams": "1,712,987,340",
+          "spotify_id": "4RVwu0g32PAqgUiJoXsdF8"
         },
         {
           "id": 16,
           "nome": "Male Fantasy",
           "duracao": "3:15",
-          "streams": "272,803,543"
+          "streams": "272,803,543",
+          "spotify_id": "4ak9GGe6afmi2HbxEjvhIC"
         }
       ]
     },
@@ -198,94 +231,108 @@
       "id": "3",
       "album": "When We All Fall Asleep, Where Do We Go?",
       "lancamento": "2019",
-      "informacoes": "When We All Fall Asleep, Where Do We Go? é o álbum de estreia da cantora estadunidense Billie Eilish, lançado em 29 de março de 2019 através das gravadoras Darkroom e Interscope Records",
+      "informacoes": "When We All Fall Asleep, Where Do We Go? é o álbum de estreia da cantora estadunidense Billie Eilish...",
       "imagem": "images/Wwafawdwg3.webp",
       "youtube": "https://youtube.com/playlist?list=PLHO0cVB3HGmHwZYcFHvQ4y7_3ByYJiqY9&si=iaIJUW5FIk7YELjw",
       "spotify": "https://open.spotify.com/intl-pt/album/0S0KGZnfBGSIssfF54WSJh?si=aG49kaD4RMOlIshVqcNUJQ",
       "faixas": [
         {
           "id": 1,
-          "nome": "!!!!!!",
+          "nome": "!!!!!!!",
           "duracao": "0:13",
-          "streams": ""
+          "streams": "",
+          "spotify_id": "0rQtoQXQfwpDW0c7Fw1NeM"
         },
         {
           "id": 2,
           "nome": "bad guy",
           "duracao": "3:14",
-          "streams": "2,826,596,076"
+          "streams": "2,826,596,076",
+          "spotify_id": "2Fxmhks0bxGSBdJ92vM42m"
         },
         {
           "id": 3,
           "nome": "xanny",
           "duracao": "4:03",
-          "streams": "521,315,529"
+          "streams": "521,315,529",
+          "spotify_id": "4QIo4oxwzzafcBWkKjDpXY"
         },
         {
           "id": 4,
           "nome": "you should see me in a crown",
           "duracao": "3:00",
-          "streams": "999,286,627"
+          "streams": "999,286,627",
+          "spotify_id": "3XF5xLJHOQQRbWya6hBp7d"
         },
         {
           "id": 5,
           "nome": "all the good girls go to hell",
           "duracao": "2:48",
-          "streams": "734,670,061"
+          "streams": "734,670,061",
+          "spotify_id": "6IRdLKIyS4p7XNiP8r6rsx"
         },
         {
           "id": 6,
           "nome": "wish you were gay",
           "duracao": "3:41",
-          "streams": "888,442,283"
+          "streams": "888,442,283",
+          "spotify_id": "3Fj47GNK2kUF0uaEDgXLaD"
         },
         {
           "id": 7,
           "nome": "when the party's over",
           "duracao": "3:16",
-          "streams": "2,347,507,524"
+          "streams": "2,347,507,524",
+          "spotify_id": "43zdsphuZLzwA9k4DJhU0I"
         },
         {
           "id": 8,
           "nome": "8",
           "duracao": "2:53",
-          "streams": "342,481,272"
+          "streams": "342,481,272",
+          "spotify_id": "6X29iaaazwho3ab7GNue5r"
         },
         {
           "id": 9,
           "nome": "my strange addiction",
           "duracao": "2:59",
-          "streams": "618,609,298"
+          "streams": "618,609,298",
+          "spotify_id": "3Tc57t9l2O8FwQZtQOvPXK"
         },
         {
           "id": 10,
           "nome": "bury a friend",
           "duracao": "3:13",
-          "streams": "1,127,460,059"
+          "streams": "1,127,460,059",
+          "spotify_id": "4SSnFejRGlZikf02HLewEF"
         },
         {
           "id": 11,
           "nome": "ilomilo",
           "duracao": "2:36",
-          "streams": "532,372,326"
+          "streams": "532,372,326",
+          "spotify_id": "7qEKqBCD2vE5vIBsrUitpD"
         },
         {
           "id": 12,
           "nome": "listen before i go",
           "duracao": "4:02",
-          "streams": "678,961,264"
+          "streams": "678,961,264",
+          "spotify_id": "0tMSssfxAL2oV8Vri0mFHE"
         },
         {
           "id": 13,
           "nome": "i love you",
           "duracao": "4:51",
-          "streams": "1,257,841,557"
+          "streams": "1,257,841,557",
+          "spotify_id": "6CcJMwBtXByIz4zQLzFkKc"
         },
         {
           "id": 14,
           "nome": "goodbye",
           "duracao": "1:59",
-          "streams": "288,130,554"
+          "streams": "288,130,554",
+          "spotify_id": "4j56tK1n8tK4Q6Qz3z8q2"
         }
       ]
     },
@@ -302,13 +349,15 @@
           "id": 1,
           "nome": "TV",
           "duracao": "4:00",
-          "streams": "982,431,002"
+          "streams": "982,431,002",
+          "spotify_id": "3GYlZ7tbxLOxe6ewMNVTkw"
         },
         {
           "id": 2,
           "nome": "The 30th",
           "duracao": "3:30",
-          "streams": "282,852,054"
+          "streams": "282,852,054",
+          "spotify_id": "5SHpuW2qjkQtFRpE6P9Nks"
         }
       ]
     },
@@ -325,49 +374,57 @@
           "id": 1,
           "nome": "Copycat",
           "duracao": "3:10",
-          "streams": "590,595,792"
+          "streams": "590,595,792",
+          "spotify_id": "5w7wuzMzsDer96KqxafeRK"
         },
         {
           "id": 2,
           "nome": "Idontwannabeyouanymore",
           "duracao": "4:06",
-          "streams": "1,303,862,738"
+          "streams": "1,303,862,738",
+          "spotify_id": "41zXlQxzTi6cGAjpOXyLYH"
         },
         {
           "id": 3,
           "nome": "My Boy",
           "duracao": "3:10",
-          "streams": "602,124,663"
+          "streams": "602,124,663",
+          "spotify_id": "1RGasjWLZ4qMN7wbtkLa3u"
         },
         {
           "id": 4,
           "nome": "Watch",
           "duracao": "3:00",
-          "streams": "890,507,425"
+          "streams": "890,507,425",
+          "spotify_id": "7eB1V5LvAdxCc7brfGhRRo"
         },
         {
           "id": 5,
           "nome": "Party Favor",
           "duracao": "2:40",
-          "streams": "308,754,065"
+          "streams": "308,754,065",
+          "spotify_id": "3WxmlTZ85sCYFnuIXmUAEe"
         },
         {
           "id": 6,
           "nome": "Bellyache",
           "duracao": "2:57",
-          "streams": "1,175,968,061"
+          "streams": "1,175,968,061",
+          "spotify_id": "1ni8ZTAY1GHXEFOGHl7fdg"
         },
         {
           "id": 7,
           "nome": "Ocean Eyes",
           "duracao": "3:20",
-          "streams": "1,984,243,607"
+          "streams": "1,984,243,607",
+          "spotify_id": "7hDVYcQq6MxkdJGweuCtl9"
         },
         {
           "id": 8,
           "nome": "Hostage",
           "duracao": "3:20",
-          "streams": "594,714,637"
+          "streams": "594,714,637",
+          "spotify_id": "1WsEgieHsWWndAzLkmV105"
         }
       ]
     }
